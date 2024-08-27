@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            // Menambahkan kolom category_id
+            // Menambahkan kolom headline_id
             $table->unsignedBigInteger('headline_id')->after('id')->nullable();
 
             // Menambahkan foreign key constraint
@@ -26,7 +26,11 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            //
+            // Menghapus foreign key constraint
+            $table->dropForeign(['headline_id']);
+
+            // Menghapus kolom headline_id
+            $table->dropColumn('headline_id');
         });
     }
 };

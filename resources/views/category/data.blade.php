@@ -42,14 +42,13 @@
                             <td>{{ $category->updated_at->format('d M Y, H:i') }}</td>
                             <td>
                                 <a href="/category/edit/{{ $category->id }}" class="btn btn-info">Edit</a>
-                                <form action="{{ url('delete/' . $category->id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('category.destroy', $category->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Are you sure you want to delete this category?')">
+                                    <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this post?')">
                                         Delete
                                     </button>
-                                </form>                                      
+                                </form>                                     
                             </td>
                         </tr>
                     @endforeach

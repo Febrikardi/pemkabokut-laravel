@@ -5,25 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Data extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'title',
-        'image',
         'description',
         'category_id',
-        'headline_id',
     ];
 
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
-    public function headline()
+
+    public function document()
     {
-        return $this->belongsTo(Headline::class);
+        return $this->hasMany(Document::class);
+    }
+    public function file()
+    {
+        return $this->hasMany(File::class);
     }
 }
-

@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use DOMDocument;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Headline;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -27,7 +28,8 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('/post/create', compact('categories'));
+        $headlines = Headline::all();
+        return view('/post/create', compact('categories','headlines'));
     }
 
     public function store(Request $request)
@@ -38,10 +40,10 @@ class PostController extends Controller
         }
 
         $description = $request->description;
-
+    
         libxml_use_internal_errors(true);
         $dom = new DOMDocument();
-        $dom->loadHTML($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $dom->loadHTML('<?xml encoding="utf-8" ?>' . $description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
         $images = $dom->getElementsByTagName('img');
 
@@ -64,7 +66,8 @@ class PostController extends Controller
             'title' => $request->title,
             'image' => $image,
             'description' => $description,
-            'category_id' => $request->category_id, // Tambahkan ini
+            'category_id' => $request->category_id,
+            'headline_id' => $request->headline_id,
         ]);
 
         return redirect('/post/data');
@@ -79,8 +82,9 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
-        $categories = Category::all(); // Ambil semua kategori
-        return view('/post/edit', compact('post', 'categories'));
+        $categories = Category::all();
+        $headlines = Headline::all();
+        return view('/post/edit', compact('post', 'categories', 'headlines'));
     }
 
 
@@ -103,7 +107,7 @@ class PostController extends Controller
 
         libxml_use_internal_errors(true);
         $dom = new DOMDocument();
-        $dom->loadHTML($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $dom->loadHTML('<?xml encoding="utf-8" ?>' . $description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
         $images = $dom->getElementsByTagName('img');
 
@@ -124,12 +128,13 @@ class PostController extends Controller
 
         $post->update([
             'title' => $request->title,
-            'image' => $post->image, // Tetap menggunakan gambar yang diperbarui
+            'image' => $post->image, 
             'description' => $description,
-            'category_id' => $request->category_id, // Tambahkan ini
+            'category_id' => $request->category_id,
+            'headline_id' => $request->headline_id,
         ]);
 
-        return redirect('/');
+        return redirect('/post/data');
     }
 
 
@@ -141,22 +146,12 @@ class PostController extends Controller
             return redirect()->back()->with('error', 'Post not found.');
         }
 
-        libxml_use_internal_errors(true);
-        $dom = new DOMDocument();
-        $dom->loadHTML($post->description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-        $images = $dom->getElementsByTagName('img');
-
-        foreach ($images as $img) {
-            if ($img instanceof \DOMElement) {
-                $src = $img->getAttribute('src');
-                $path = public_path(Str::after($src, '/'));
-
-                if (File::exists($path)) {
-                    File::delete($path);
-                }
-            }
+        // Hapus gambar terkait jika ada
+        if ($post->image && Storage::disk('public')->exists($post->image)) {
+            Storage::disk('public')->delete($post->image);
         }
 
+        // Hapus post
         $post->delete();
 
         return redirect('/post/data')->with('success', 'Post deleted successfully.');

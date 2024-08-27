@@ -1,15 +1,15 @@
 @extends('layout')
 
-@section('title', 'Data Headlines')
+@section('title', 'Data Files')
 
 @section('content')
     <div class="card bg-white p-4 shadow rounded-4 border-0">
         <div class="d-flex justify-content-between mb-4">
             <div>
-                <h4>Data Headlines</h4>
+                <h4>Data Files</h4>
             </div>
             <div>
-                <a href="{{ route('headline.create') }}" class="btn btn-primary">Add new Headline</a>
+                <a href="/file/create" class="btn btn-primary">Add new Files</a>
             </div>
         </div>
 
@@ -28,28 +28,33 @@
                     <tr>
                         <th>ID</th>
                         <th>Title</th>
-                        <th>Created At</th>
-                        <th>Updated At</th>
+                        <th>Path</th>
+                        <th>Date</th>
+                        <th>Data</th>
+                        <th>Document</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($headlines as $headline)
+                    @foreach ($files as $file)
                         <tr>
-                            <td>{{ $headline->id }}</td>
-                            <td>{{ $headline->title }}</td>
-                            <td>{{ $headline->created_at->format('d M Y, H:i') }}</td>
-                            <td>{{ $headline->updated_at->format('d M Y, H:i') }}</td>
+                            <td>{{ $file->id }}</td>
+                            <td>{{ $file->title }}</td>
+                            <td>{{ $file->file_path }}</td>
+                            <td>{{ $file->file_date }}</td>
+                            <td>{{ $file->data->title ?? 'No Data' }}</td>
+                            <td>{{ $file->document->title ?? 'No Document' }}</td>
+                            
                             <td>
-                                <a href="{{ route('headline.edit', $headline->id) }}" class="btn btn-info">Edit</a>
-                                <form action="{{ route('headline.destroy', $headline->id) }}" method="POST" class="d-inline">
+                                <a href="/data/show/{{ $document->id }}" class="btn btn-success">Show</a>
+                                <a href="/data/edit/{{ $document->id }}" class="btn btn-info">Edit</a>
+                                <form action="{{ route('', $data->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Are you sure you want to delete this headline?')">
+                                    <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this document?')">
                                         Delete
                                     </button>
-                                </form>                                      
+                                </form>                                                                      
                             </td>
                         </tr>
                     @endforeach

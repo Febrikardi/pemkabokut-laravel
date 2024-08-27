@@ -1,0 +1,34 @@
+.navbar {
+    border-bottom: 4px solid #cfec4a;
+    background-color: #213349;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: backdrop-filter 0.3s ease, background-color 0.3s ease, height 0.3s ease;
+    height: 170px;
+}
+
+.navbar.blur {
+    backdrop-filter: blur(10px);
+    background-color: rgba(33, 51, 73, 0.832);
+    height: 100px;
+}
+
+#search-section {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+}
+
+.navbar .dropdown-toggle::after {
+    display: none;
+}
+
+.navbar-nav {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body {
+    overflow-x: hidden;
+}

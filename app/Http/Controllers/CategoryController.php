@@ -81,13 +81,13 @@ class CategoryController extends Controller
 
         // Jika kategori tidak ditemukan, kembalikan dengan pesan error
         if (!$category) {
-            return redirect()->route('category.data')->with('error', 'Category not found.');
+            return redirect()->back()->with('error', 'Category not found.');
         }
 
         // Hapus kategori
         $category->delete();
 
         // Redirect kembali ke halaman daftar kategori dengan pesan sukses
-        return redirect()->route('category.data')->with('success', 'Category deleted successfully.');
+        return redirect('category/data')->with('success', 'Category deleted successfully.');
     }
 }

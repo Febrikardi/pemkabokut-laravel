@@ -27,10 +27,10 @@ return new class extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             // Menghapus foreign key constraint
-            $table->dropForeign(['headline_id']);
+            $table->dropForeign(['category_id']);
 
             // Menghapus kolom category_id
-            $table->dropColumn('headline_id');
+            $table->dropColumn('category_id');
         });
     }
 };

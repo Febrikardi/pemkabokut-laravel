@@ -29,6 +29,7 @@
                         <th>ID</th>
                         <th>Title</th>
                         <th>Category</th>
+                        <th>Headline</th>
                         <th>Image</th>
                         <th>Action</th>
                     </tr>
@@ -39,6 +40,7 @@
                             <td>{{ $post->id }}</td>
                             <td>{{ $post->title }}</td>
                             <td>{{ $post->category->title ?? 'No Category' }}</td>
+                            <td>{{ $post->headline->title ?? 'No Headline' }}</td>
                             <td>
                                 @if ($post->image)
                                     <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}" height="100">
@@ -49,14 +51,13 @@
                             <td>
                                 <a href="/post/show/{{ $post->id }}" class="btn btn-success">Show</a>
                                 <a href="/post/edit/{{ $post->id }}" class="btn btn-info">Edit</a>
-                                <form action="/delete/{{ $post->id }}" method="POST" class="d-inline">
+                                <form action="{{ route('post.destroy', $post->id) }}" method="POST" class="d-inline">
                                     @csrf
-                                    @method('DELETE') <!-- Pastikan untuk menambahkan ini -->
-                                    <button class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Are you sure you want to delete this post?')">
+                                    @method('DELETE')
+                                    <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this post?')">
                                         Delete
                                     </button>
-                                </form>                                             
+                                </form>                                                                      
                             </td>
                         </tr>
                     @endforeach
