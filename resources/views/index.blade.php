@@ -50,16 +50,24 @@ height: 250px; background-color: #fff; width: 82vw; margin: 0; padding: 0;">
                     <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                         <a href="/post/show/{{ $post->id }}" class="text-decoration-none text-dark">
                             <div class="card bg-white border-0">
-                                <img src="{{ $post->image }}" class="img-fluid rounded-4 mb-4"
-                                    style="height: 170px; width: 100%;  border-radius: 15px;" alt="{{ $post->title }}">
+                                @if (Str::startsWith($post->image, ['http://', 'https://']))
+                                    <!-- Jika gambar adalah link eksternal -->
+                                    <img src="{{ $post->image }}" class="img-fluid rounded-4 mb-4"
+                                        style="height: 170px; width: 100%;  border-radius: 15px;" alt="{{ $post->title }}">
+                                @else
+                                    <!-- Jika gambar berasal dari storage -->
+                                    <img src="{{ asset('storage/' . $post->image) }}" class="img-fluid rounded-4 mb-4"
+                                        style="height: 170px; width: 100%;  border-radius: 15px;" alt="{{ $post->title }}">
+                                @endif
                                 <h3 class="fw-bold mb-3 text-center"
                                     style="font-family: 'Georgia', serif; font-size: 17px;">
                                     {{ $post->title }}
                                 </h3>
-                                <p style="font-family: 'Arial', sans-serif; font-size: 15px; font-weight: normal; text-align: center;">
+                                <p
+                                    style="font-family: 'Arial', sans-serif; font-size: 15px; font-weight: normal; text-align: center;">
                                     {{ substr(strip_tags(html_entity_decode($post->description)), 0, 200) }}...
-                                </p>  
-                                
+                                </p>
+
 
                                 <p class="text-center">Published on {{ $post->created_at->format('d M Y') }}</p>
                             </div>
