@@ -2,7 +2,7 @@
 
 @section('content')
     {{-- Detail Post --}}
-    <section id="detail">
+    <section id="detail" style="padding-top: 120px;">
         <style>
             .container-fluid {
                 padding-left: 0;
@@ -32,7 +32,11 @@
                         </p>
 
                         <h3 class="fw-bold mb-3">{{ $post->title }}</h3>
-                        <p class="mb-3">Published on {{ $post->created_at->format('d M Y') }}</p>
+                        <p class="mb-3">
+                            @if ($post->published_at)
+                                Published on {{ $post->published_at->format('d M Y, H:i') }} WIB
+                            @endif
+                        </p>
                         <div class="mt-4">
                             {!! $post->description !!}
                         </div>

@@ -36,10 +36,35 @@ class DocumentController extends Controller
         // Buat data baru
         Document::create([
             'title' => $request->title,
-            'document_id' => $request->document_id,
+            'data_id' => $request->data_id,
         ]);
 
         // Redirect ke halaman yang diinginkan (misalnya halaman daftar kategori)
         return redirect()->route('document.data')->with('success', 'Data created successfully.');
+    }
+
+    public function destroy($id)
+    {
+        // Cari data berdasarkan ID
+        $document = Document::find($id);
+
+        // Jika data tidak ditemukan, kembalikan dengan pesan error
+        if (!$document) {
+            return redirect()->route('document.data')->with('error', 'Data not found.');
+        }
+
+        // Hapus data
+        $document->delete();
+
+        // Redirect kembali ke halaman daftar headline dengan pesan sukses
+        return redirect()->route('document.data')->with('success', 'Document deleted successfully.');
+    }
+    public function show($id)
+    {
+        // Cari dokumen berdasarkan ID
+        $document = Document::with('data', 'file')->findOrFail($id);
+
+        // Jika dokumen ditemukan, kirim ke view
+        return view('document.show', compact('document'));
     }
 }

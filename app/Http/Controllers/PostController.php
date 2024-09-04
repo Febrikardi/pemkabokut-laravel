@@ -29,18 +29,22 @@ class PostController extends Controller
     {
         $categories = Category::all();
         $headlines = Headline::all();
-        return view('/post/create', compact('categories','headlines'));
+        return view('/post/create', compact('categories', 'headlines'));
     }
 
     public function store(Request $request)
     {
         $image = null;
         if ($request->hasFile('image')) {
-            $image = $request->file('image')->store('uploads', 'public');
+            // Ambil nama asli file
+            $originalName = $request->file('image')->getClientOriginalName();
+
+            // Menyimpan file dengan nama asli ke storage
+            $image = $request->file('image')->storeAs('uploads', $originalName, 'public');
         }
 
         $description = $request->description;
-    
+
         libxml_use_internal_errors(true);
         $dom = new DOMDocument();
         $dom->loadHTML('<?xml encoding="utf-8" ?>' . $description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
@@ -68,6 +72,7 @@ class PostController extends Controller
             'description' => $description,
             'category_id' => $request->category_id,
             'headline_id' => $request->headline_id,
+            'published_at' => $request->published_at,
         ]);
 
         return redirect('/post/data');
@@ -98,8 +103,11 @@ class PostController extends Controller
                 Storage::disk('public')->delete($post->image);
             }
 
-            // Store new image
-            $image = $request->file('image')->store('uploads', 'public');
+            // Ambil nama asli file
+            $originalName = $request->file('image')->getClientOriginalName();
+
+            // Menyimpan file dengan nama asli ke storage
+            $image = $request->file('image')->storeAs('uploads', $originalName, 'public');
             $post->image = $image;
         }
 
@@ -128,15 +136,15 @@ class PostController extends Controller
 
         $post->update([
             'title' => $request->title,
-            'image' => $post->image, 
+            'image' => $post->image,
             'description' => $description,
             'category_id' => $request->category_id,
             'headline_id' => $request->headline_id,
+            'published_at' => $request->published_at,
         ]);
 
         return redirect('/post/data');
     }
-
 
     public function destroy($id)
     {

@@ -15,6 +15,11 @@ class Post extends Model
         'description',
         'category_id',
         'headline_id',
+        'published_at',
+    ];
+
+    protected $casts = [
+        'published_at' => 'datetime',
     ];
 
     public function category()

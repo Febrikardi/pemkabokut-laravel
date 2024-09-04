@@ -15,7 +15,11 @@ class HeadlineSeeder extends Seeder
     {
         $headlines = [
             ['title' => 'Headlines OKU Timur'],
-            ['title' => 'Data Umum']
+            ['title' => 'Data Umum', 'category_id' => 8],
+            ['title' => 'Artikel', 'category_id' => 8],
+            ['title' => 'Berita Daerah', 'category_id' => 8],
+            ['title' => 'Berita Umum', 'category_id' => 8],
+            ['title' => 'Serba serbi', 'category_id' => 8]
         ];
 
         foreach ($headlines as $headline) {

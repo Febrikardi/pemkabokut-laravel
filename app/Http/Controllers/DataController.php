@@ -53,4 +53,12 @@ class DataController extends Controller
         // Redirect kembali ke halaman daftar data dengan pesan sukses
         return redirect('data/index')->with('success', 'Data deleted successfully.');
     }
+    public function show($id)
+    {
+        // Cari data berdasarkan ID
+        $data = Data::with(['category', 'document.file'])->findOrFail($id);
+
+        // Jika data ditemukan, kirim ke view
+        return view('data.show', compact('data'));
+    }
 }

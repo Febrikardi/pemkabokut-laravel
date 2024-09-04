@@ -8,6 +8,7 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\HeadlineController;
 use App\Models\Data;
+use App\Models\Headline;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,7 @@ Route::delete('/category/delete/{id}',[CategoryController::class,'destroy'])->na
 
 Route::get('/headline/create', [HeadlineController::class, 'create'])->name('headline.create');
 Route::post('/headlines', [HeadlineController::class, 'store'])->name('headlines.store');
+Route::get('/headlines/show/{id}',[HeadlineController::class,'show']);
 Route::get('/headline/data', [HeadlineController::class, 'data'])->name('headline.data');
 Route::get('/headline/edit/{id}', [HeadlineController::class, 'edit'])->name('headline.edit');
 Route::post('/headline/update/{id}', [HeadlineController::class, 'update'])->name('headline.update');
@@ -46,8 +48,18 @@ Route::delete('/headline/delete/{id}',[HeadlineController::class,'destroy'])->na
 Route::get('/data/index', [DataController::class, 'index'])->name('data.index');
 Route::get('/data/create', [DataController::class, 'create'])->name('data.create');
 Route::post('/data', [DataController::class, 'store'])->name('data.store');
-Route::delete('delete/{id}',[DataController::class,'destroy'])->name('data.destroy');
+Route::delete('/data/delete/{id}',[DataController::class,'destroy'])->name('data.destroy');
+Route::get('/data/show/{id}', [DataController::class, 'show'])->name('data.show');
 
 Route::get('/document/data', [DocumentController::class, 'data'])->name('document.data');
+Route::get('/document/create', [DocumentController::class, 'create'])->name('document.create');
+Route::post('/document', [DocumentController::class, 'store'])->name('document.store');
+Route::delete('delete/{id}',[DocumentController::class,'destroy'])->name('document.destroy');
+Route::get('/document/show/{id}', [DocumentController::class, 'show'])->name('document.show');
 
 Route::get('/file/data', [FileController::class, 'data'])->name('file.data');
+Route::get('/file/create', [FileController::class, 'create'])->name('file.create');
+Route::post('/file', [FileController::class, 'store'])->name('file.store');
+Route::delete('/file/{id}', [FileController::class, 'destroy'])->name('file.destroy');
+Route::get('/file/show/{id}',[FileController::class,'show']);
+Route::get('/file/download/{id}', [FileController::class, 'download'])->name('file.download');

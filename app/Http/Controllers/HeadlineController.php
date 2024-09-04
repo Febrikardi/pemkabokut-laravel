@@ -18,6 +18,12 @@ class HeadlineController extends Controller
         return view('headline.create');
     }
 
+    public function show($id)
+    {
+        $headline = Headline::find($id);
+        return view('/headline/show', compact('headlines'));
+    }
+
     public function store(Request $request)
     {
         // Validasi data yang dikirim

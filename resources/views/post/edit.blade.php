@@ -22,7 +22,7 @@
 </head>
 
 <body>
-    <div class="container p-4 ">
+    <div class="container col-xxl-8 py-5 ">
         <div class="row justify-content-md-center">
             <div class="col-md-12">
                 <div class="text-center">
@@ -65,7 +65,8 @@
                     
                     <label for="description">Description:</label>
                     <textarea name="description" id="description" cols="30" rows="10">{{ $post->description }}</textarea>
-                    
+                    <label for="published_at">Tanggal publish:</label>
+                    <input type="datetime-local" class="form-control" name="published_at" id="published_at">
                     <button type="submit" class="btn btn-lg btn-primary mt-3">Submit</button>
                 </form>
             </div>

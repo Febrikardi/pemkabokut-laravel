@@ -17,4 +17,12 @@ class Category extends Model
     {
         return $this->hasMany(Post::class);
     }
+    public function data()
+    {
+        return $this->hasMany(Data::class);
+    }
+    public function headlines()
+    {
+        return $this->hasMany(Headline::class);
+    }
 }

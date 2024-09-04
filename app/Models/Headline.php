@@ -17,4 +17,8 @@ class Headline extends Model
     {
         return $this->hasMany(Post::class);
     }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

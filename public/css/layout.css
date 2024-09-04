@@ -1,20 +1,57 @@
 .navbar {
-    border-bottom: 4px solid #cfec4a;
-    background-color: #213349;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    transition: backdrop-filter 0.3s ease, background-color 0.3s ease, height 0.3s ease;
-    height: 170px;
+    font-family: 'Roboto', sans-serif;
 }
 
-.navbar.blur {
+.navbar-nav .nav-item {
+    margin-right: 15px; /* Anda bisa mengatur nilai ini sesuai kebutuhan */
+    font-size: 16px;
+}
+
+/* Navbar default untuk halaman lain */
+.navbar-default {
+    border-bottom: 4px solid #cfec4a;
     backdrop-filter: blur(10px);
-    background-color: rgba(33, 51, 73, 0.832);
+    background-color: rgba(0, 43, 116, 0.900);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: backdrop-filter 0.3s ease, background-color 0.3s ease, height 0.3s ease;
+    height: 120px;
+}
+
+.navbar-default.blur {
+    backdrop-filter: blur(15px);
+    background-color: rgba(4, 46, 107, 0.832);
+    height: 100px;
+}
+
+/* Navbar khusus untuk halaman index dengan efek blur */
+.navbar-index {
+    border-bottom: 4px solid #cfec4a;
+    backdrop-filter: blur(25px);
+    background-color: rgba(37, 62, 138, 0);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: backdrop-filter 0.3s ease, background-color 0.3s ease, height 0.3s ease;
+    height: 120px;
+}
+
+.navbar-index.blur {
+    backdrop-filter: blur(15px);
+    background-color: rgba(4, 46, 107, 0.832);
     height: 100px;
 }
 
 #search-section {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+}
+
+#judul-section {
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
@@ -32,3 +69,44 @@
 body {
     overflow-x: hidden;
 }
+
+/* Mengaktifkan dropdown saat di-hover */
+.navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Mengatur tampilan dropdown agar muncul dengan halus */
+.navbar-nav .dropdown-menu {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s, opacity 0.2s;
+}
+
+/* Efek fokus saat kursor diarahkan pada nav-item */
+.navbar-nav .nav-item:hover,
+.navbar-nav .nav-item:focus {
+    background-color: rgba(255, 255, 255, 0.1); /* Warna latar belakang saat di-hover */
+    border-radius: 5px; /* Membuat sudutnya menjadi bulat */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Efek fokus khusus untuk link di dalam nav-item */
+.navbar-nav .nav-item:hover .nav-link,
+.navbar-nav .nav-item:focus .nav-link {
+    color: #000000; /* Warna teks saat di-hover */
+    transform: scale(1.05); /* Memperbesar sedikit teks saat di-hover */
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Efek fokus untuk dropdown item */
+.navbar-nav .dropdown-menu .dropdown-item:hover,
+.navbar-nav .dropdown-menu .dropdown-item:focus {
+    background-color: rgba(120, 178, 248, 0.692); /* Warna latar belakang saat di-hover */
+    color: #ffffff; /* Warna teks saat di-hover */
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+

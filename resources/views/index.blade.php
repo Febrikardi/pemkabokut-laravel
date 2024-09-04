@@ -3,24 +3,26 @@
 @section('content')
     {{-- Background Section with Search Form --}}
     <section id="search-section"
-        style="position: relative; background-image: url('{{ asset('images/OKU Timur.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; height: 500px;">
+        style="position: relative; background-image: url('{{ asset('images/OKU Timur.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; height: 762px; margin-top: -12px;">
         <!-- Overlay -->
         <div
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(6, 7, 29, 0.045);">
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(110% 300% at 2% 0%, rgba(0, 39, 106, 0.999) 5%, rgba(0, 0, 0, 0) 62%);">
         </div>
 
         <!-- Search Form -->
         <div class="container-fluid p-0 m-0 d-flex justify-content-center align-items-center"
             style="height: 100%; position: relative;">
             <form class="d-flex justify-content-center" role="search"
-                style="width: 50%; z-index: 1; margin-top: 420px; position: relative;">
+                style="width: 50%; z-index: 1; margin-top: 466px; position: relative;">
                 <input class="form-control" type="search" placeholder="Cari informasi disini...." aria-label="Search"
                     style="background-color: white; color: #6c757d; border: none; border-radius: 10px; box-shadow: none; font-size: 18px; padding: 10px 20px; width: 100%;">
                 <button class="btn btn-primary" type="submit"
                     style="position: absolute; right: 5px; top: 5px; bottom: 5px; padding: 0 20px; background-color: #213349; border: none; border-radius: 10px;">Cari</button>
             </form>
-        </div>
+        </div>  
     </section>
+
+
 
     {{-- Pengumuman --}}
     <section id="pengumuman-section"
@@ -67,9 +69,11 @@ height: 250px; background-color: #fff; width: 82vw; margin: 0; padding: 0;">
                                     style="font-family: 'Arial', sans-serif; font-size: 15px; font-weight: normal; text-align: center;">
                                     {{ substr(strip_tags(html_entity_decode($post->description)), 0, 200) }}...
                                 </p>
-
-
-                                <p class="text-center">Published on {{ $post->created_at->format('d M Y') }}</p>
+                                <p class="text-center">
+                                    @if ($post->published_at)
+                                        Published on {{ $post->published_at->format('d M Y') }}
+                                    @endif
+                                </p>                                                              
                             </div>
                         </a>
                     </div>

@@ -11,10 +11,14 @@ class File extends Model
 
     protected $fillable = [
         'title',
-        'title_path',
+        'file_path',
         'file_date',
         'document_id',
         'data_id',
+    ];
+
+    protected $casts = [
+        'file_path' => 'array',
     ];
 
     public function document()
