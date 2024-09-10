@@ -14,7 +14,7 @@ class PostSeeder extends Seeder
     public function run(): void
     {
         $posts = [
-            ['title' => 'Sejarah', 'category_id' => 1],
+            ['title' => 'Sejarah', 'category_id' => 1, 'description' => 'Ini adalah deskripsi untuk Sejarah.'],
             ['title' => 'Arti Lambang', 'category_id' => 1],
             ['title' => 'Motto Daerah', 'category_id' => 1],
             ['title' => 'Visi dan Misi', 'category_id' => 1],

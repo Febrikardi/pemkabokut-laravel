@@ -7,9 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title', 'Portal Resmi Pemerintah Kabupaten Ogan Komering Ulu Timur')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/layout.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 </head>
 
 <body>
@@ -18,7 +22,7 @@
         <div class="container col-xxl-12 d-flex justify-content-between">
             <a class="navbar-brand" href="{{ url('/') }}">
                 <img src="https://okutimurkab.go.id/wp-content/themes/okutimurkab/images/logo_horisontal.png"
-                    height="73" alt="" />
+                    height="100" alt="" />
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -40,31 +44,34 @@
                             <ul class="dropdown-menu">
                                 @if ($category->id == 6 || $category->id == 7)
                                     @foreach ($category->data as $dataItem)
-                                        <li><a class="dropdown-item"
+                                        <li>
+                                            <a class="dropdown-item"
                                                 href="{{ url('/data/show/' . $dataItem->id) }}">{{ $dataItem->title }}</a>
                                         </li>
                                     @endforeach
                                 @elseif ($category->id == 8)
                                     @if ($category->headlines)
                                         @foreach ($category->headlines as $headline)
-                                            <li><a class="dropdown-item"
+                                            <li>
+                                                <a class="dropdown-item"
                                                     href="{{ url('/headline/show/' . $headline->id) }}">{{ $headline->title }}</a>
                                             </li>
                                         @endforeach
                                     @endif
                                     @foreach ($category->posts as $post)
-                                        <li><a class="dropdown-item"
+                                        <li>
+                                            <a class="dropdown-item"
                                                 href="{{ url('/post/show/' . $post->id) }}">{{ $post->title }}</a>
                                         </li>
                                     @endforeach
                                 @else
                                     @foreach ($category->posts as $post)
-                                        <li><a class="dropdown-item"
+                                        <li>
+                                            <a class="dropdown-item"
                                                 href="{{ url('/post/show/' . $post->id) }}">{{ $post->title }}</a>
                                         </li>
                                     @endforeach
                                 @endif
-
                             </ul>
                         </li>
                     @endforeach
@@ -91,13 +98,31 @@
         </div>
     </nav>
     {{-- Navbar --}}
+
     <div class="container col-xxl-8 py-0">
         @yield('content')
+        <div class="social-icons">
+            <a href="https://www.facebook.com/diskominfo.okutimur.33?mibextid=ZbWKwL" target="_blank">
+                <img src="{{ URL::asset('/images/facebook.png') }}" alt="Facebook">
+            </a>
+            <a href="https://www.tiktok.com/@diskominfokabokutimur?_t=8pSKpeZFB1m&_r=1" target="_blank">
+                <img src="{{ URL::asset('/images/tiktok.png') }}" alt="Tiktok">
+            </a>
+            <a href="https://www.instagram.com/diskominfo.okutimur?igsh=dWdrenR0Y2Z4dHgy" target="_blank">
+                <img src="{{ URL::asset('/images/instagram.png') }}" alt="Instagram">
+            </a>
+            <a href="https://youtube.com/@diskominfookutimur9504?si=Ke9dyfDnzkx-pAVN" target="_blank">
+                <img src="{{ URL::asset('/images/youtube.png') }}" alt="YouTube">
+            </a>
+        </div>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('js/layout.js') }}"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 </body>
 
 </html>

@@ -18,3 +18,19 @@ document.addEventListener('scroll', function () {
     }
 });
 
+$('#description').summernote({
+    height: 300,
+    callbacks: {
+        onImageUpload: function(files) {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                // Menyisipkan gambar dengan batas maksimal lebar 100%
+                $('#description').summernote('insertImage', e.target.result, function($image) {
+                    $image.css('max-width', '100%');
+                    $image.css('border-radius', '5px');
+                });
+            };
+            reader.readAsDataURL(files[0]);
+        }
+    }
+});

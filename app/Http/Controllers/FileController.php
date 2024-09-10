@@ -33,28 +33,35 @@ class FileController extends Controller
         // Validasi data yang dikirim
         $request->validate([
             'title' => 'required|string|max:255',
-            'file_path' => 'required|file|mimes:pdf,doc,docx,jpg,png,zip,rar,xls,xlsx|max:20000',
+            'file_path.*' => 'required|file|mimes:pdf,doc,docx,jpg,png,zip,rar,xls,xlsx|max:20000', // Validasi array file
             'file_date' => 'required|date',
             'document_id' => 'nullable|exists:documents,id',
             'data_id' => 'nullable|exists:data,id',
         ]);
 
-        $originalName = $request->file('file_path')->getClientOriginalName();
-        // Menyimpan file ke storage
-        $path = $request->file('file_path')->storeAs('files', $originalName);
+        if ($request->hasFile('file_path')) {
+            foreach ($request->file('file_path') as $file) {
+                // Mendapatkan nama file asli
+                $originalName = $file->getClientOriginalName();
 
-        // Membuat entri file baru di database
-        File::create([
-            'title' => $request->title,
-            'file_path' => $path,
-            'file_date' => $request->file_date,
-            'document_id' => $request->document_id,
-            'data_id' => $request->data_id,
-        ]);
+                // Menyimpan file ke storage
+                $path = $file->storeAs('files', $originalName);
+
+                // Membuat entri file baru di database untuk setiap file
+                File::create([
+                    'title' => $request->title,
+                    'file_path' => $path,
+                    'file_date' => $request->file_date,
+                    'document_id' => $request->document_id,
+                    'data_id' => $request->data_id,
+                ]);
+            }
+        }
 
         // Redirect ke halaman yang diinginkan (misalnya halaman daftar file)
-        return redirect()->route('file.data')->with('success', 'File created successfully.');
+        return redirect()->route('file.data')->with('success', 'Files created successfully.');
     }
+
     public function download($id)
     {
         $file = File::findOrFail($id);

@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             HeadlineSeeder::class,
             PostSeeder::class,
-            DataSeeder::class
+            DataSeeder::class,
+            DocumentSeeder::class
         ]);
     }
 }

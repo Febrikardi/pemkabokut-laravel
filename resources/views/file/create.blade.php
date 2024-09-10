@@ -21,21 +21,19 @@
                 @csrf
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}"
-                        required>
+                    <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" required>
                 </div>
-
+            
                 <div class="mb-3">
-                    <label for="file_path" class="form-label">File</label>
-                    <input type="file" class="form-control" id="file_path" name="file_path" required>
+                    <label for="file_path" class="form-label">Files</label>
+                    <input type="file" class="form-control" id="file_path" name="file_path[]" multiple required>
                 </div>
-
+            
                 <div class="mb-3">
                     <label for="file_date" class="form-label">File Date</label>
-                    <input type="date" class="form-control" id="file_date" name="file_date"
-                        value="{{ old('file_date') }}" required>
+                    <input type="date" class="form-control" id="file_date" name="file_date" value="{{ old('file_date') }}" required>
                 </div>
-
+            
                 <div class="mb-3">
                     <label for="document_id" class="form-label">Document</label>
                     <select class="form-control" id="document_id" name="document_id">
@@ -45,7 +43,7 @@
                         @endforeach
                     </select>
                 </div>
-
+            
                 <div class="mb-3">
                     <label for="data_id" class="form-label">Data</label>
                     <select class="form-control" id="data_id" name="data_id">
@@ -55,9 +53,9 @@
                         @endforeach
                     </select>
                 </div>
-
-                <button type="submit" class="btn btn-primary">Create File</button>
-            </form>
+            
+                <button type="submit" class="btn btn-primary">Create Files</button>
+            </form>            
         </div>
     </section>
 

@@ -18,7 +18,7 @@ class DataSeeder extends Seeder
         $data = [
             ['title' => 'Rencana Umum Pengadaan', 'category_id' => 6],
             ['title' => 'Umum', 'category_id' => 6],
-            ['title' => 'DataUmum', 'category_id' => 7],
+            ['title' => 'Data Umum', 'category_id' => 7],
             ['title' => 'Perancangan Daerah', 'category_id' => 7],
             ['title' => 'Keuangan Daerah', 'category_id' => 7],
             ['title' => 'Lakip', 'category_id' => 7],
