@@ -22,28 +22,26 @@
             </form>
 
             <!-- Icon Section -->
-            <div class="icon-section d-flex justify-content-center align-items-center" style="width: 70%;">
+            <div class="icon-section d-flex justify-content-center align-items-center">
                 <div class="row">
                     <div class="col text-center">
-                        <div class="card bg-dark text-white">
+                        <div class="card">
                             <div class="card-body">
-                                <img src="{{ URL::asset('/images/agent.png') }}" alt="Pelayanan Kependudukan"
-                                    class="icon-img">
+                                <img src="{{ URL::asset('/images/agent.png') }}" alt="Pelayanan Kependudukan" class="icon-img">
                                 <p class="mt-2">Pelayanan Kependudukan</p>
                             </div>
                         </div>
                     </div>
                     <div class="col text-center">
-                        <div class="card bg-dark text-white">
+                        <div class="card">
                             <div class="card-body">
-                                <img src="{{ URL::asset('/images/public-service.png') }}" alt="Pelayanan Masyarakat"
-                                    class="icon-img">
+                                <img src="{{ URL::asset('/images/public-service.png') }}" alt="Pelayanan Masyarakat" class="icon-img">
                                 <p class="mt-2">Pelayanan Masyarakat</p>
                             </div>
                         </div>
                     </div>
                     <div class="col text-center">
-                        <div class="card bg-dark text-white">
+                        <div class="card">
                             <div class="card-body">
                                 <img src="{{ URL::asset('/images/taxes.png') }}" alt="Pelayanan Pajak" class="icon-img">
                                 <p class="mt-2">Pelayanan Pajak</p>
@@ -51,68 +49,90 @@
                         </div>
                     </div>
                     <div class="col text-center">
-                        <div class="card bg-dark text-white">
+                        <div class="card">
                             <div class="card-body">
-                                <img src="{{ URL::asset('/images/petition.png') }}" alt="Pengaduan Masyarakat"
-                                    class="icon-img">
+                                <img src="{{ URL::asset('/images/petition.png') }}" alt="Pengaduan Masyarakat" class="icon-img">
                                 <p class="mt-2">Pengaduan Masyarakat</p>
                             </div>
                         </div>
                     </div>
                     <div class="col text-center">
-                        <div class="card bg-dark text-white">
+                        <div class="card">
                             <div class="card-body">
-                                <img src="{{ URL::asset('/images/calculator.png') }}" alt="Transparansi Anggaran"
-                                    class="icon-img">
+                                <img src="{{ URL::asset('/images/calculator.png') }}" alt="Transparansi Anggaran" class="icon-img">
                                 <p class="mt-2">Transparansi Anggaran</p>
                             </div>
                         </div>
                     </div>
                     <div class="col text-center">
-                        <div class="card bg-dark text-white">
+                        <div class="card">
                             <div class="card-body">
-                                <img src="{{ URL::asset('/images/travel-map.png') }}" alt="Destinasi Wisata"
-                                    class="icon-img">
+                                <img src="{{ URL::asset('/images/travel-map.png') }}" alt="Destinasi Wisata" class="icon-img">
                                 <p class="mt-2">Destinasi Wisata</p>
                             </div>
                         </div>
                     </div>
                     <div class="col text-center">
-                        <div class="card bg-dark text-white">
+                        <div class="card">
                             <div class="card-body">
-                                <img src="{{ URL::asset('/images/legal-document.png') }}" alt="Produk Hukum"
-                                    class="icon-img">
+                                <img src="{{ URL::asset('/images/legal-document.png') }}" alt="Produk Hukum" class="icon-img">
                                 <p class="mt-2">Produk Hukum</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>                  
         </div>
     </section>
 
-
-
-
-
-    {{-- Pengumuman --}}
-    <section id="pengumuman-section"
-        style="position: relative; background-image: url('{{ asset('images/cover.png') }}'); 
+    {{-- Pengumuman menjadi Post atau Berita Terbaru --}}
+<section id="pengumuman-section"
+style="position: relative; background-image: url('images/cover.png'); 
 background-size: auto; background-position: right bottom; background-repeat: no-repeat; 
 height: 250px; background-color: #fff; width: 82vw; margin: 0; padding: 0;">
-        <!-- Overlay -->
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(6, 7, 29, 0);">
-        </div>
-
-        <!-- Content inside pengumuman-section, if any -->
-        <div class="container" style="max-width: 1200px; margin: auto;">
-            <div class="row">
-                <div class="col">
-                    <!-- Your content here -->
+{{-- Container Pengumuman --}}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-12">
+            @foreach ($posts as $post) {{-- Menambahkan perulangan seperti headline --}}
+                <div class="card border-0 shadow-sm mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            {{-- Gambar untuk Post --}}
+                            @if (Str::startsWith($post->image, ['http://', 'https://']))
+                                <img src="{{ $post->image }}" class="img-fluid rounded-start"
+                                    alt="Gambar Post">
+                            @else
+                                <img src="{{ asset('storage/' . $post->image) }}" class="img-fluid rounded-start"
+                                    alt="Gambar Post">
+                            @endif
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $post->title }}</h5>
+                                <div class="d-flex justify-content-start align-items-center text-muted mb-2">
+                                    <span class="me-3"><i class="bi bi-calendar"></i> 
+                                        @if ($post->published_at)
+                                            {{ $post->published_at->format('d M Y') }}
+                                        @else
+                                            Tanggal tidak tersedia
+                                        @endif
+                                    </span>
+                                    <span class="me-3"><i class="bi bi-person"></i> Admin</span>
+                                    <span><i class="bi bi-eye"></i> {{ $post->views }}</span>
+                                </div>
+                                <p class="card-text">{{ Str::limit($post->excerpt, 150, '...') }}</p>
+                                <a href="/post/show/{{ $post->id }}" class="btn btn-link text-primary p-0">Selengkapnya <i
+                                        class="bi bi-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            @endforeach
         </div>
-    </section>
+    </div>
+</div>
+</section>
 
     {{-- Headline --}}
     <section id="headline" class="py-4" style="margin-left: -20%; margin-right: -20%">

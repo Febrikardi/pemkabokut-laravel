@@ -206,13 +206,32 @@ body {
     transform: scale(1.2);
 }
 
-.icon-section {
-    margin-top: 20px; /* Adjust the spacing between search form and icons */
+.icon-section .card {
+    background-color: #213349;
+    border-radius: 10px;
+    text-align: center;
+    width: 120px; /* Atur lebar kartu */
+    margin: 10px; /* Jarak antar kartu */
+    display: inline-block;
 }
 
-.icon-img {
-    width: 60px; /* Adjust size of icons */
+.icon-section .card img {
+    width: 80px; /* Ukuran ikon */
+    height: auto;
 }
+
+.icon-section p {
+    font-size: 14px;
+    color: white;
+    white-space: normal; /* Mengizinkan teks membungkus */
+    word-wrap: break-word; /* Memastikan kata yang panjang dibungkus dengan baik */
+    margin-top: 10px;
+    margin-bottom: 0;
+    line-height: 1.2em;
+    text-align: center;
+    padding: 0 5px; /* Tambahkan sedikit padding di samping untuk lebih rapi */
+}
+
 
 #search-section .card {
     background-color: rgba(0, 43, 116, 0.900); /* Card background color */

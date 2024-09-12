@@ -11,9 +11,12 @@
     <link rel="stylesheet" href="{{ asset('css/layout.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Owl Carousel CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+
 </head>
 
 <body>
@@ -118,11 +121,23 @@
 
     </div>
 
+    <footer class="text-center text-white bg-dark mt-5 py-3">
+        <div class="container">
+            <p class="mb-1">Hak Cipta © 2012 <a href="http://pemkabokut-laravel.test//">Pemerintah Kabupaten Ogan
+                    Komering Ulu Timur</a></p>
+            <p class="mb-1">Jl. Lintas Sumatera KM 7, Kota Baru Selatan, Martapura, Prov. Sumatera Selatan, 32181</p>
+            <p class="mb-1">Tel: 0735-481035, Fax: 0735-482750</p>
+            <p>Email: <a href="mailto:info@okutimurkab.go.id" class="text-white">info@okutimurkab.go.id</a></p>
+        </div>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('js/layout.js') }}"></script>
+    <!-- Owl Carousel JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 </body>
+
 
 </html>

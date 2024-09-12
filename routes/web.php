@@ -56,6 +56,7 @@ Route::get('/document/create', [DocumentController::class, 'create'])->name('doc
 Route::post('/document', [DocumentController::class, 'store'])->name('document.store');
 Route::delete('delete/{id}',[DocumentController::class,'destroy'])->name('document.destroy');
 Route::get('/document/show/{id}', [DocumentController::class, 'show'])->name('document.show');
+Route::get('/', [DocumentController::class, 'index']);
 
 Route::get('/file/data', [FileController::class, 'data'])->name('file.data');
 Route::get('/file/create', [FileController::class, 'create'])->name('file.create');
