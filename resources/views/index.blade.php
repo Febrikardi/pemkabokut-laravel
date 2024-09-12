@@ -27,7 +27,8 @@
                     <div class="col text-center">
                         <div class="card">
                             <div class="card-body">
-                                <img src="{{ URL::asset('/images/agent.png') }}" alt="Pelayanan Kependudukan" class="icon-img">
+                                <img src="{{ URL::asset('/images/agent.png') }}" alt="Pelayanan Kependudukan"
+                                    class="icon-img">
                                 <p class="mt-2">Pelayanan Kependudukan</p>
                             </div>
                         </div>
@@ -35,7 +36,8 @@
                     <div class="col text-center">
                         <div class="card">
                             <div class="card-body">
-                                <img src="{{ URL::asset('/images/public-service.png') }}" alt="Pelayanan Masyarakat" class="icon-img">
+                                <img src="{{ URL::asset('/images/public-service.png') }}" alt="Pelayanan Masyarakat"
+                                    class="icon-img">
                                 <p class="mt-2">Pelayanan Masyarakat</p>
                             </div>
                         </div>
@@ -51,7 +53,8 @@
                     <div class="col text-center">
                         <div class="card">
                             <div class="card-body">
-                                <img src="{{ URL::asset('/images/petition.png') }}" alt="Pengaduan Masyarakat" class="icon-img">
+                                <img src="{{ URL::asset('/images/petition.png') }}" alt="Pengaduan Masyarakat"
+                                    class="icon-img">
                                 <p class="mt-2">Pengaduan Masyarakat</p>
                             </div>
                         </div>
@@ -59,7 +62,8 @@
                     <div class="col text-center">
                         <div class="card">
                             <div class="card-body">
-                                <img src="{{ URL::asset('/images/calculator.png') }}" alt="Transparansi Anggaran" class="icon-img">
+                                <img src="{{ URL::asset('/images/calculator.png') }}" alt="Transparansi Anggaran"
+                                    class="icon-img">
                                 <p class="mt-2">Transparansi Anggaran</p>
                             </div>
                         </div>
@@ -67,7 +71,8 @@
                     <div class="col text-center">
                         <div class="card">
                             <div class="card-body">
-                                <img src="{{ URL::asset('/images/travel-map.png') }}" alt="Destinasi Wisata" class="icon-img">
+                                <img src="{{ URL::asset('/images/travel-map.png') }}" alt="Destinasi Wisata"
+                                    class="icon-img">
                                 <p class="mt-2">Destinasi Wisata</p>
                             </div>
                         </div>
@@ -75,64 +80,86 @@
                     <div class="col text-center">
                         <div class="card">
                             <div class="card-body">
-                                <img src="{{ URL::asset('/images/legal-document.png') }}" alt="Produk Hukum" class="icon-img">
+                                <img src="{{ URL::asset('/images/legal-document.png') }}" alt="Produk Hukum"
+                                    class="icon-img">
                                 <p class="mt-2">Produk Hukum</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>                  
+            </div>
         </div>
     </section>
 
     {{-- Pengumuman menjadi Post atau Berita Terbaru --}}
-<section id="pengumuman-section"
-style="position: relative; background-image: url('images/cover.png'); 
+    <section id="pengumuman-section"
+        style="position: relative; background-image: url('images/cover.png'); 
 background-size: auto; background-position: right bottom; background-repeat: no-repeat; 
-height: 250px; background-color: #fff; width: 82vw; margin: 0; padding: 0;">
-{{-- Container Pengumuman --}}
-<div class="container py-4">
-    <div class="row">
-        <div class="col-lg-12">
-            @foreach ($posts as $post) {{-- Menambahkan perulangan seperti headline --}}
-                <div class="card border-0 shadow-sm mb-3">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            {{-- Gambar untuk Post --}}
-                            @if (Str::startsWith($post->image, ['http://', 'https://']))
-                                <img src="{{ $post->image }}" class="img-fluid rounded-start"
-                                    alt="Gambar Post">
-                            @else
-                                <img src="{{ asset('storage/' . $post->image) }}" class="img-fluid rounded-start"
-                                    alt="Gambar Post">
-                            @endif
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $post->title }}</h5>
-                                <div class="d-flex justify-content-start align-items-center text-muted mb-2">
-                                    <span class="me-3"><i class="bi bi-calendar"></i> 
-                                        @if ($post->published_at)
-                                            {{ $post->published_at->format('d M Y') }}
-                                        @else
-                                            Tanggal tidak tersedia
-                                        @endif
-                                    </span>
-                                    <span class="me-3"><i class="bi bi-person"></i> Admin</span>
-                                    <span><i class="bi bi-eye"></i> {{ $post->views }}</span>
+height: 250px; background-color: #fff; width: 82vw; margin-bottom: 50px; padding: 0;">
+        {{-- Judul "Berita Terkini" --}}
+        <div class="container d-flex justify-content-between align-items-center mb-3" style="margin-left: -190px;">
+            <h2 class="text-dark" style="font-weight: 600; font-size: 22px;  margin-top: 20px">Berita Terkini</h2>
+            <div class="d-flex">
+                <button class="btn btn-light" style="border: 1px solid #ccc; border-radius: 4px;">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+                <button class="btn btn-light ms-2" style="border: 1px solid #ccc; border-radius: 4px;">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        {{-- Garis Bawah untuk Judul --}}
+        <div class="container mb-3" style="border-bottom: 2px solid #2F4F7F; margin-left: -190px;"></div>
+
+        {{-- Container Pengumuman --}}
+        <div class="container py-4" style="margin-left: -190px">
+            <div class="row">
+                <div class="col-lg-12">
+                    @if ($latestHeadlinePost)
+                        {{-- Menampilkan post terbaru yang memiliki headline_id --}}
+                        <div class="card border-0 shadow-sm mb-3">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    {{-- Gambar untuk Post --}}
+                                    @if (Str::startsWith($latestHeadlinePost->image, ['http://', 'https://']))
+                                        <img src="{{ $latestHeadlinePost->image }}" class="img-fluid rounded-start"
+                                            alt="Gambar Post">
+                                    @else
+                                        <img src="{{ asset('storage/' . $latestHeadlinePost->image) }}"
+                                            class="img-fluid rounded-start" alt="Gambar Post">
+                                    @endif
                                 </div>
-                                <p class="card-text">{{ Str::limit($post->excerpt, 150, '...') }}</p>
-                                <a href="/post/show/{{ $post->id }}" class="btn btn-link text-primary p-0">Selengkapnya <i
-                                        class="bi bi-arrow-right"></i></a>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $latestHeadlinePost->title }}</h5>
+                                        <div class="d-flex justify-content-start align-items-center text-muted mb-2">
+                                            <span class="me-3"><i class="bi bi-calendar"></i>
+                                                @if ($latestHeadlinePost->published_at)
+                                                    {{ $latestHeadlinePost->published_at->format('d M Y') }}
+                                                @else
+                                                    Tanggal tidak tersedia
+                                                @endif
+                                            </span>
+                                            <span class="me-3"><i class="bi bi-person"></i> Admin</span>
+                                            <span><i class="bi bi-eye"></i> {{ $latestHeadlinePost->views }}</span>
+                                        </div>
+                                        <p class="card-text">{{ Str::limit($latestHeadlinePost->excerpt, 150, '...') }}
+                                        </p>
+                                        <a href="/post/show/{{ $latestHeadlinePost->id }}"
+                                            class="btn btn-link text-primary p-0">Selengkapnya <i
+                                                class="bi bi-arrow-right"></i></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @else
+                        <p>Tidak ada berita terbaru untuk ditampilkan.</p>
+                    @endif
                 </div>
-            @endforeach
+            </div>
         </div>
-    </div>
-</div>
-</section>
+    </section>
 
     {{-- Headline --}}
     <section id="headline" class="py-4" style="margin-left: -20%; margin-right: -20%">

@@ -17,7 +17,8 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view('index', compact('posts'));
+        $latestHeadlinePost = Post::whereNotNull('headline_id')->orderBy('published_at', 'desc')->first();
+        return view('index', compact('posts', 'latestHeadlinePost'));
     }
     public function data()
     {
